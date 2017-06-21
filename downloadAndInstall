@@ -1,0 +1,246 @@
+#!/bin/bash
+#
+# A script to download, compile and install all necessary software
+# (OOFEM, YADE amd MuPIF) to be used for FEM-DEM coupling 
+#
+# prerequisites: wget, unzip, git, svn, cmake, tar
+#
+# Tested on Ubuntu 16.04 system
+# enjoy
+# Jan Stransky <jan.stransky@fsv.cvut.cz>
+#
+
+#=====================================================================
+# INPUTS
+#=====================================================================
+#
+TOP=$HOME/femdem         # where to put all downloaded and installed files
+INCLUDE_DIR=$TOP/include # include directory
+TMP=/tmp                 # temporary directory
+# OOFEM
+OOFEM=true           # process OOFEM or not
+OOFEM_DIR=$TOP/oofem # OOFEM directory
+OOFEM_J=1            # how many cores to us for OOFEM compilation
+# YADE
+YADE=true          # process OOFEM or not
+YADE_DIR=$TOP/yade # OOFEM directory
+YADE_J=1           # how many cores to us for OOFEM compilation
+# MuPIF
+MUPIF=true           # process OOFEM or not
+MUPIF_DIR=$TOP/mupif # OOFEM directory
+# end of inputs
+#=====================================================================
+
+# -e = exit after error
+# -x = print all command before execution
+set -e -x
+
+#=====================================================================
+# checking prerequisites
+#=====================================================================
+echo Checking prerequisites ...
+for CMD in wget unzip git svn cmake tar; do
+	hash $CMD 2>/dev/null || {
+		echo
+		echo missing command: $CMD
+		echo
+		exit 1
+	}
+done
+
+[ -d $INCLUDE_DIR ] || mkdir -p $INCLUDE_DIR
+
+#=====================================================================
+# OOFEM
+#=====================================================================
+if $OOFEM; then
+	OOFEMTMP=$TMP/oofem-2.3
+	rm -rf $OOFEMTMP $OOFEMTMP.zip $OOFEM_DIR
+	# download and unzip oofem-2.3.zip
+	wget http://www.oofem.org/cgi-bin/OOFEM/download.cgi?download=oofem-2.3.zip -O $OOFEMTMP.zip
+	cd $TMP
+	unzip -q $OOFEMTMP.zip
+	cd $OOFEMTMP
+	# modifiy the source code
+	git apply <<EOF
+diff --git a/bindings/python/oofemlib.cpp b/bindings/python/oofemlib.cpp
+index 1ba283f..14ff7cd 100644
+--- a/bindings/python/oofemlib.cpp
++++ b/bindings/python/oofemlib.cpp
+@@ -699,7 +699,7 @@ void pyclass_Element()
+         .add_property("length", &PyElement::computeLength)
+         .def("giveLabel", &Element::giveLabel)
+         .add_property("label",&Element::giveLabel)
+-        .def("giveLocationArray", &PyElement::giveLocationArray)
++        //.def("giveLocationArray", &PyElement::giveLocationArray)
+         .def("giveNumberOfDofManagers", &PyElement::giveNumberOfDofManagers)
+         .add_property("numberOfDofManagers", &PyElement::giveNumberOfDofManagers)
+         .def("computeNumberOfDofs", &PyElement::computeNumberOfDofs)
+@@ -810,7 +810,7 @@ void pyclass_Load()
+ {
+     class_<PyLoad, bases<GeneralBoundaryCondition>, boost::noncopyable >("Load", no_init)
+         .def("setComponentArray", &Load::setComponentArray)
+-        .def("giveCopyOfComponentArray", &Load::giveCopyOfComponentArray)
++        .def("giveComponentArray", &Load::giveCopyOfComponentArray, return_value_policy<manage_new_object>())
+         .def("computeValueAt", pure_virtual( &Load::computeValueAt))
+         ;
+ }
+diff --git a/src/oofemlib/load.h b/src/oofemlib/load.h
+index b9f45ae..9dad935 100644
+--- a/src/oofemlib/load.h
++++ b/src/oofemlib/load.h
+@@ -165,8 +165,7 @@ protected:
+ 
+ public:
+     void setComponentArray(FloatArray &arry) { componentArray = arry; }
+-    FloatArray giveCopyOfComponentArray() { FloatArray answer = componentArray;
+-                                            return answer; }
++    FloatArray* giveCopyOfComponentArray() { return new FloatArray(componentArray); }
+ };
+ } // end namespace oofem
+ #endif // load_h
+diff --git a/src/sm/nldeidynamic.C b/src/sm/nldeidynamic.C
+index e17c31c..ebe0a61 100644
+--- a/src/sm/nldeidynamic.C
++++ b/src/sm/nldeidynamic.C
+@@ -78,7 +78,7 @@ NumericalMethod *NlDEIDynamic :: giveNumericalMethod(MetaStep *mStep)
+ //     - SolutionOfLinearEquations
+ 
+ {
+-    //return NULL;  // Not necessary here - Diagonal matrix and simple inversion is used.
++    return NULL;
+     if ( nMethod ) {
+         return nMethod;
+     }
+EOF
+	#
+	mkdir -p $OOFEM_DIR
+	mv $OOFEMTMP $OOFEM_DIR/source
+	# compile oofem
+	mkdir -p $OOFEM_DIR/build
+	cd $OOFEM_DIR/build
+	cmake -DUSE_PYTHON_BINDINGS=ON $OOFEM_DIR/source
+	make -j $OOFEM_J
+	# create symbolic link
+	rm -f $INCLUDE_DIR/liboofem.so
+	ln -s $OOFEM_DIR/build/liboofem.so $INCLUDE_DIR/liboofem.so
+	rm -rf $OOFEMTMP $OOFEMTMP.zip
+fi
+
+#=====================================================================
+#YADE
+#=====================================================================
+if $YADE; then
+	#
+	YADETMP=$TMP/yade-git
+	rm -rf $YADETMP $YADETMP.tar.gz $YADE_DIR
+	mkdir -p $YADE_DIR
+	# download and extract yade (TODO version?)
+	YADESTAMP=4e2cda0a80a422de9e6cea8edd51a7d7121825e7
+	wget https://github.com/yade/trunk/archive/$YADESTAMP.tar.gz -O $YADETMP.tar.gz
+	tar xfz $YADETMP.tar.gz
+	mv trunk-$YADESTAMP $YADE_DIR/source
+	cd $YADE_DIR/source
+	pwd
+	# compile YADE
+	mkdir -p $YADE_DIR/build $YADE_DIR/install
+	cd $YADE_DIR/build
+	cmake \
+		-DINSTALL_PREFIX=$YADE_DIR/install \
+		-DENABLE_LINSOLV=OFF \
+		-DENABLE_PFVFLOW=OFF \
+		-DENABLE_LBMFLOW=OFF \
+		-DNOSUFFIX=ON \
+		$YADE_DIR/source
+	make -j $YADE_J install
+	# create symbolic link
+	rm -f $INCLUDE_DIR/libyade.py
+	ln -s $YADE_DIR/install/bin/yade $INCLUDE_DIR/libyade.py
+	rm -rf $YADETMP $YADETMP.tar.gz
+fi
+
+#=====================================================================
+# MuPIF
+#=====================================================================
+if $MUPIF; then
+	rm -rf $MUPIF_DIR
+	# download from svn
+	svn checkout http://mech.fsv.cvut.cz/svn/mupif/trunk $MUPIF_DIR
+	# change version to 293
+	cd $MUPIF_DIR
+	svn up -r 293
+	# modify source code
+	git apply <<EOF
+diff --git a/api/yade/yade_interface.py b/api/yade/yade_interface.py
+index 2559e5e..dea8dab 100755
+--- a/api/yade/yade_interface.py
++++ b/api/yade/yade_interface.py
+@@ -129,7 +129,7 @@ class YadeUnstructuredMesh(mesh.UnstructuredMesh):
+             for c in cells:
+                ii = [v.number for v in c.giveVertices()]
+                if len(ii)==3:
+-                  cc[v.number] = ii
++                  cc[c.number] = ii
+                else:
+                   cc[v.number] = (ii[0],ii[1],ii[2])
+                   extras.append((ii[0],ii[1],ii[3]))
+@@ -167,31 +167,6 @@ class YADE_API(api.API):
+ 
+     def registerMesh(self, mm, tstep=None, tetras=True, bodies=None):
+         if isinstance(mm,mesh.UnstructuredMesh):
+-            m = mesh.UnstructuredMesh()
+-            m.setup(mm.vertexList,mm.cellList)
+-            m._vertexFacesDict = dict( (v.number,[]) for v in m.vertices() )
+-            m._facetVerticesDict = {}
+-            m._facets = []
+-            for c in m.cells():
+-                v = c.giveVertices()
+-                cgt = c.giveGeometryType()
+-                if cgt == cell.Triangle_2d_1:
+-                    facet = yade.utils.facet((v[0].coords,v[1].coords,v[2].coords))
+-                    m._facets.append(facet)
+-                    self._omega.bodies.append(facet)
+-                    m._facetVerticesDict[facet.id] = v
+-                    for vv in v:
+-                        self._vertexFacesDict[vv.number].append(facet)
+-                elif cgt == cell.Tetrahedron_3d_1:
+-                    for i,j,k in ((0,1,2),(0,3,1),(0,2,3),(1,2,3)):
+-                        facet = yade.utils.facet((v[i].coords,v[j].coords,v[k].coords))
+-                        m._facets.append(facet)
+-                        self._omega.bodies.append(facet)
+-                        m._facetVerticesDict[facet.id] = [v[i],v[j],v[k]]
+-                        for vv in v:
+-                            m._vertexFacesDict[vv.number].append(facet)
+-                else:
+-                    raise APIError, 'cell geometry type %s not supported in Yade'%(cgt)
+             m = YadeUnstructuredMesh()
+             m.setup(mm.vertexList,mm.cellList,True,tetras,bodies)
+             if 0:
+EOF
+	rm -f $INCLUDE_DIR/mupif
+	ln -s $MUPIF_DIR $INCLUDE_DIR/mupif
+fi
+
+#=====================================================================
+# other
+#=====================================================================
+# export PYTHONPATH in .bashrc file
+EXP="export PYTHONPATH=$INCLUDE_DIR:\$PYTHONPATH"
+echo $EXP >> $HOME/.bashrc
+echo $EXP >> /tmp/exportpythonpath
+source /tmp/exportpythonpath
+
+set +x
+
+echo
+echo ======================================================================
+echo Now everything should be compiled and prepared for use.
+echo Try out some examples :-\)
+echo
+echo There is no need to run this script any more
+echo
+echo If you want to run examples directly in this terminal, execute the
+echo the following command:
+echo $EXP
+echo ======================================================================
+echo
