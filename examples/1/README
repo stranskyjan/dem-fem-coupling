@@ -3,11 +3,11 @@ Three DEM spheres "bombarding" a FEM cantilever
 
 What is here
 ============
-exammple1.sh           ... main shell script to run the example
-exammple1-pv.py        ... script for postprocessing
-exammple1-profile.py   ... script for profiling evaluation
-exammple1.py           ... main python script
-exammple1-yade.py      ... yade part of the simulation
-exammple1-oofem.in     ... oofem part of the simulation
-exammple1-unv.py       ... python script to be used by SALOME to create .unv mesh
-exammple1-unv2oofem.py ... python script to convert .unv mesh to oofem input file
+example1.sh           ... main shell script to run the example
+example1-pv.py        ... script for postprocessing
+example1-profile.py   ... script for profiling evaluation
+example1.py           ... main python script
+example1-yade.py      ... yade part of the simulation
+example1-oofem.in     ... oofem part of the simulation
+example1-unv.py       ... python script to be used by SALOME to create .unv mesh
+example1-unv2oofem.py ... python script to convert .unv mesh to oofem input file
