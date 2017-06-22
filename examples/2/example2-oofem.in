@@ -1,0 +1,541 @@
+/tmp/example2-oofem.out
+surface fem - dem coupling test
+nldeidynamic nsteps 2 dumpcoef 0.03 deltat 0.1 nmodules 1
+vtkxml 1 tstep_step 0 domain_all vars 2 1 4 primvars 1 1 cellvars 1 102
+domain 3d
+OutputManager tstep_all dofman_all element_all
+ndofman 128 nelem 270 ncrosssect 2 nmat 2 nbc 130 nic 0 nltf 2
+node 1 coords 3 0.35 0.15 0.633154165755 load 1 2
+node 2 coords 3 1.05 0.15 0.633154165755 load 1 3
+node 3 coords 3 1.05 0.35 0.633154165755 load 1 4
+node 4 coords 3 0.35 0.35 0.633154165755 load 1 5
+node 5 coords 3 1.05 0.15 0.733154165755 load 1 6
+node 6 coords 3 0.35 0.15 0.733154165755 load 1 7
+node 7 coords 3 1.05 0.35 0.733154165755 load 1 8
+node 8 coords 3 0.35 0.35 0.733154165755 load 1 9
+node 9 coords 3 0.583333333333 0.15 0.633154165755 load 1 10
+node 10 coords 3 0.816666666667 0.15 0.633154165755 load 1 11
+node 11 coords 3 1.05 0.216666666667 0.633154165755 load 1 12
+node 12 coords 3 1.05 0.283333333333 0.633154165755 load 1 13
+node 13 coords 3 0.583333333333 0.35 0.633154165755 load 1 14
+node 14 coords 3 0.816666666667 0.35 0.633154165755 load 1 15
+node 15 coords 3 0.35 0.216666666667 0.633154165755 load 1 16
+node 16 coords 3 0.35 0.283333333333 0.633154165755 load 1 17
+node 17 coords 3 1.05 0.15 0.666487499088 load 1 18
+node 18 coords 3 1.05 0.15 0.699820832422 load 1 19
+node 19 coords 3 0.583333333333 0.15 0.733154165755 load 1 20
+node 20 coords 3 0.816666666667 0.15 0.733154165755 load 1 21
+node 21 coords 3 0.35 0.15 0.666487499088 load 1 22
+node 22 coords 3 0.35 0.15 0.699820832422 load 1 23
+node 23 coords 3 1.05 0.216666666667 0.733154165755 load 1 24
+node 24 coords 3 1.05 0.283333333333 0.733154165755 load 1 25
+node 25 coords 3 0.583333333333 0.35 0.733154165755 load 1 26
+node 26 coords 3 0.816666666667 0.35 0.733154165755 load 1 27
+node 27 coords 3 0.35 0.216666666667 0.733154165755 load 1 28
+node 28 coords 3 0.35 0.283333333333 0.733154165755 load 1 29
+node 29 coords 3 0.35 0.35 0.666487499088 load 1 30
+node 30 coords 3 0.35 0.35 0.699820832422 load 1 31
+node 31 coords 3 1.05 0.35 0.666487499088 load 1 32
+node 32 coords 3 1.05 0.35 0.699820832422 load 1 33
+node 33 coords 3 0.816666666667 0.216666666667 0.633154165755 load 1 34
+node 34 coords 3 0.816666666667 0.283333333333 0.633154165755 load 1 35
+node 35 coords 3 0.583333333333 0.216666666667 0.633154165755 load 1 36
+node 36 coords 3 0.583333333333 0.283333333333 0.633154165755 load 1 37
+node 37 coords 3 0.583333333333 0.15 0.666487499088 load 1 38
+node 38 coords 3 0.583333333333 0.15 0.699820832422 load 1 39
+node 39 coords 3 0.816666666667 0.15 0.666487499088 load 1 40
+node 40 coords 3 0.816666666667 0.15 0.699820832422 load 1 41
+node 41 coords 3 0.583333333333 0.216666666667 0.733154165755 load 1 42
+node 42 coords 3 0.583333333333 0.283333333333 0.733154165755 load 1 43
+node 43 coords 3 0.816666666667 0.216666666667 0.733154165755 load 1 44
+node 44 coords 3 0.816666666667 0.283333333333 0.733154165755 load 1 45
+node 45 coords 3 0.35 0.283333333333 0.666487499088 load 1 46
+node 46 coords 3 0.35 0.283333333333 0.699820832422 load 1 47
+node 47 coords 3 0.35 0.216666666667 0.666487499088 load 1 48
+node 48 coords 3 0.35 0.216666666667 0.699820832422 load 1 49
+node 49 coords 3 0.816666666667 0.35 0.666487499088 load 1 50
+node 50 coords 3 0.816666666667 0.35 0.699820832422 load 1 51
+node 51 coords 3 0.583333333333 0.35 0.666487499088 load 1 52
+node 52 coords 3 0.583333333333 0.35 0.699820832422 load 1 53
+node 53 coords 3 1.05 0.216666666667 0.666487499088 load 1 54
+node 54 coords 3 1.05 0.216666666667 0.699820832422 load 1 55
+node 55 coords 3 1.05 0.283333333333 0.666487499088 load 1 56
+node 56 coords 3 1.05 0.283333333333 0.699820832422 load 1 57
+node 57 coords 3 0.583333333333 0.216666666667 0.666487499088 load 1 58
+node 58 coords 3 0.583333333333 0.216666666667 0.699820832422 load 1 59
+node 59 coords 3 0.583333333333 0.283333333333 0.666487499088 load 1 60
+node 60 coords 3 0.583333333333 0.283333333333 0.699820832422 load 1 61
+node 61 coords 3 0.816666666667 0.216666666667 0.666487499088 load 1 62
+node 62 coords 3 0.816666666667 0.216666666667 0.699820832422 load 1 63
+node 63 coords 3 0.816666666667 0.283333333333 0.666487499088 load 1 64
+node 64 coords 3 0.816666666667 0.283333333333 0.699820832422 load 1 65
+node 65 coords 3 0.0 0.0 0.0 load 1 66
+node 66 coords 3 1.4 0.0 0.0 load 1 67
+node 67 coords 3 1.4 0.5 0.0 load 1 68
+node 68 coords 3 0.0 0.5 0.0 load 1 69
+node 69 coords 3 1.4 0.0 -1.0 load 1 70 bc 3 1 1 1
+node 70 coords 3 0.0 0.0 -1.0 load 1 71 bc 3 1 1 1
+node 71 coords 3 1.4 0.5 -1.0 load 1 72 bc 3 1 1 1
+node 72 coords 3 0.0 0.5 -1.0 load 1 73 bc 3 1 1 1
+node 73 coords 3 0.466666666667 0.0 0.0 load 1 74
+node 74 coords 3 0.933333333333 0.0 0.0 load 1 75
+node 75 coords 3 1.4 0.166666666667 0.0 load 1 76
+node 76 coords 3 1.4 0.333333333333 0.0 load 1 77
+node 77 coords 3 0.466666666667 0.5 0.0 load 1 78
+node 78 coords 3 0.933333333333 0.5 0.0 load 1 79
+node 79 coords 3 0.0 0.166666666667 0.0 load 1 80
+node 80 coords 3 0.0 0.333333333333 0.0 load 1 81
+node 81 coords 3 1.4 0.0 -0.333333333333 load 1 82
+node 82 coords 3 1.4 0.0 -0.666666666667 load 1 83
+node 83 coords 3 0.466666666667 0.0 -1.0 load 1 84 bc 3 1 1 1
+node 84 coords 3 0.933333333333 0.0 -1.0 load 1 85 bc 3 1 1 1
+node 85 coords 3 0.0 0.0 -0.333333333333 load 1 86
+node 86 coords 3 0.0 0.0 -0.666666666667 load 1 87
+node 87 coords 3 1.4 0.166666666667 -1.0 load 1 88 bc 3 1 1 1
+node 88 coords 3 1.4 0.333333333333 -1.0 load 1 89 bc 3 1 1 1
+node 89 coords 3 0.466666666667 0.5 -1.0 load 1 90 bc 3 1 1 1
+node 90 coords 3 0.933333333333 0.5 -1.0 load 1 91 bc 3 1 1 1
+node 91 coords 3 0.0 0.166666666667 -1.0 load 1 92 bc 3 1 1 1
+node 92 coords 3 0.0 0.333333333333 -1.0 load 1 93 bc 3 1 1 1
+node 93 coords 3 0.0 0.5 -0.333333333333 load 1 94
+node 94 coords 3 0.0 0.5 -0.666666666667 load 1 95
+node 95 coords 3 1.4 0.5 -0.333333333333 load 1 96
+node 96 coords 3 1.4 0.5 -0.666666666667 load 1 97
+node 97 coords 3 0.466666666667 0.166666666667 0.0 load 1 98
+node 98 coords 3 0.466666666667 0.333333333333 0.0 load 1 99
+node 99 coords 3 0.933333333333 0.166666666667 0.0 load 1 100
+node 100 coords 3 0.933333333333 0.333333333333 0.0 load 1 101
+node 101 coords 3 0.933333333333 0.0 -0.333333333333 load 1 102
+node 102 coords 3 0.933333333333 0.0 -0.666666666667 load 1 103
+node 103 coords 3 0.466666666667 0.0 -0.333333333333 load 1 104
+node 104 coords 3 0.466666666667 0.0 -0.666666666667 load 1 105
+node 105 coords 3 0.933333333333 0.166666666667 -1.0 load 1 106 bc 3 1 1 1
+node 106 coords 3 0.933333333333 0.333333333333 -1.0 load 1 107 bc 3 1 1 1
+node 107 coords 3 0.466666666667 0.166666666667 -1.0 load 1 108 bc 3 1 1 1
+node 108 coords 3 0.466666666667 0.333333333333 -1.0 load 1 109 bc 3 1 1 1
+node 109 coords 3 0.0 0.166666666667 -0.333333333333 load 1 110
+node 110 coords 3 0.0 0.166666666667 -0.666666666667 load 1 111
+node 111 coords 3 0.0 0.333333333333 -0.333333333333 load 1 112
+node 112 coords 3 0.0 0.333333333333 -0.666666666667 load 1 113
+node 113 coords 3 0.466666666667 0.5 -0.333333333333 load 1 114
+node 114 coords 3 0.466666666667 0.5 -0.666666666667 load 1 115
+node 115 coords 3 0.933333333333 0.5 -0.333333333333 load 1 116
+node 116 coords 3 0.933333333333 0.5 -0.666666666667 load 1 117
+node 117 coords 3 1.4 0.333333333333 -0.333333333333 load 1 118
+node 118 coords 3 1.4 0.333333333333 -0.666666666667 load 1 119
+node 119 coords 3 1.4 0.166666666667 -0.333333333333 load 1 120
+node 120 coords 3 1.4 0.166666666667 -0.666666666667 load 1 121
+node 121 coords 3 0.933333333333 0.166666666667 -0.333333333333 load 1 122
+node 122 coords 3 0.933333333333 0.166666666667 -0.666666666667 load 1 123
+node 123 coords 3 0.933333333333 0.333333333333 -0.333333333333 load 1 124
+node 124 coords 3 0.933333333333 0.333333333333 -0.666666666667 load 1 125
+node 125 coords 3 0.466666666667 0.166666666667 -0.333333333333 load 1 126
+node 126 coords 3 0.466666666667 0.166666666667 -0.666666666667 load 1 127
+node 127 coords 3 0.466666666667 0.333333333333 -0.333333333333 load 1 128
+node 128 coords 3 0.466666666667 0.333333333333 -0.666666666667 load 1 129
+ltrspace 1 nodes 4 59 61 63 64 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 2 nodes 4 47 37 57 58 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 3 nodes 4 22 58 48 27 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 4 nodes 4 16 35 36 59 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 5 nodes 4 37 61 57 58 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 6 nodes 4 58 40 62 43 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 7 nodes 4 35 34 36 59 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 8 nodes 4 61 17 53 54 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 9 nodes 4 40 54 62 43 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 10 nodes 4 34 11 12 55 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 11 nodes 4 13 34 14 49 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 12 nodes 4 47 59 45 46 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 13 nodes 4 46 58 60 42 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 14 nodes 4 16 13 4 29 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 15 nodes 4 59 49 51 52 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 16 nodes 4 52 64 50 26 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 17 nodes 4 10 11 33 61 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 18 nodes 4 29 59 51 52 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 19 nodes 4 46 52 30 8 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 20 nodes 4 35 10 33 61 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 21 nodes 4 61 55 63 64 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 22 nodes 4 64 54 56 24 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 23 nodes 4 34 3 14 49 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 24 nodes 4 49 55 31 32 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 25 nodes 4 64 32 50 26 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 26 nodes 4 47 48 22 58 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 27 nodes 4 22 27 6 19 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 28 nodes 4 16 45 47 59 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 29 nodes 4 47 46 48 58 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 30 nodes 4 46 28 27 42 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 31 nodes 4 16 29 45 59 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 32 nodes 4 29 30 46 52 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 33 nodes 4 46 8 28 42 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 34 nodes 4 35 57 37 61 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 35 nodes 4 37 58 38 40 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 36 nodes 4 58 41 19 43 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 37 nodes 4 35 59 57 61 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 38 nodes 4 59 60 58 64 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 39 nodes 4 58 64 60 42 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 40 nodes 4 13 51 59 49 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 41 nodes 4 59 52 60 64 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 42 nodes 4 52 25 42 26 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 43 nodes 4 10 61 39 17 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 44 nodes 4 61 62 40 54 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 45 nodes 4 40 43 20 5 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 46 nodes 4 34 63 61 55 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 47 nodes 4 61 64 62 54 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 48 nodes 4 64 44 43 24 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 49 nodes 4 34 49 63 55 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 50 nodes 4 49 50 64 32 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 51 nodes 4 64 26 44 24 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 52 nodes 4 1 35 15 47 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 53 nodes 4 1 47 21 37 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 54 nodes 4 1 9 35 37 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 55 nodes 4 35 57 47 37 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 56 nodes 4 1 35 47 37 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 57 nodes 4 21 37 47 22 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 58 nodes 4 37 58 22 38 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 59 nodes 4 47 22 37 58 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 60 nodes 4 22 38 58 19 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 61 nodes 4 58 41 27 19 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 62 nodes 4 22 58 27 19 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 63 nodes 4 15 35 16 47 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 64 nodes 4 35 59 47 57 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 65 nodes 4 16 47 35 59 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 66 nodes 4 47 57 59 58 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 67 nodes 4 59 60 46 58 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 68 nodes 4 47 59 46 58 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 69 nodes 4 48 58 46 27 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 70 nodes 4 58 42 27 41 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 71 nodes 4 46 27 58 42 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 72 nodes 4 16 36 13 59 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 73 nodes 4 13 51 29 59 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 74 nodes 4 16 13 29 59 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 75 nodes 4 45 59 29 46 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 76 nodes 4 59 52 46 60 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 77 nodes 4 29 46 59 52 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 78 nodes 4 46 60 52 42 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 79 nodes 4 52 25 8 42 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 80 nodes 4 46 52 8 42 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 81 nodes 4 9 10 35 37 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 82 nodes 4 10 61 37 39 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 83 nodes 4 35 37 10 61 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 84 nodes 4 37 39 61 40 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 85 nodes 4 61 62 58 40 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 86 nodes 4 37 61 58 40 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 87 nodes 4 38 40 58 19 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 88 nodes 4 40 43 19 20 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 89 nodes 4 58 19 40 43 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 90 nodes 4 35 33 34 61 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 91 nodes 4 34 63 59 61 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 92 nodes 4 35 34 59 61 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 93 nodes 4 57 61 59 58 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 94 nodes 4 61 64 58 62 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 95 nodes 4 59 58 61 64 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 96 nodes 4 58 42 41 43 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 97 nodes 4 58 62 64 43 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 98 nodes 4 64 44 42 43 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 99 nodes 4 58 64 42 43 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 100 nodes 4 36 34 13 59 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 101 nodes 4 34 49 59 63 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 102 nodes 4 13 59 34 49 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 103 nodes 4 59 63 49 64 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 104 nodes 4 49 50 52 64 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 105 nodes 4 59 49 52 64 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 106 nodes 4 60 64 52 42 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 107 nodes 4 64 26 42 44 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 108 nodes 4 52 42 64 26 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 109 nodes 4 10 2 11 17 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 110 nodes 4 11 53 61 17 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 111 nodes 4 10 11 61 17 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 112 nodes 4 39 17 61 40 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 113 nodes 4 17 54 40 18 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 114 nodes 4 61 40 17 54 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 115 nodes 4 40 18 54 5 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 116 nodes 4 54 23 43 5 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 117 nodes 4 40 54 43 5 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 118 nodes 4 33 11 34 61 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 119 nodes 4 11 55 61 53 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 120 nodes 4 34 61 11 55 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 121 nodes 4 61 53 55 54 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 122 nodes 4 55 56 64 54 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 123 nodes 4 61 55 64 54 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 124 nodes 4 62 54 64 43 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 125 nodes 4 54 24 43 23 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 126 nodes 4 64 43 54 24 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 127 nodes 4 34 12 3 55 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 128 nodes 4 3 31 49 55 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 129 nodes 4 34 3 49 55 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 130 nodes 4 63 55 49 64 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 131 nodes 4 55 32 64 56 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 132 nodes 4 49 64 55 32 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 133 nodes 4 64 56 32 24 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 134 nodes 4 32 7 26 24 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 135 nodes 4 64 32 26 24 mat 1 crosssect 1 bodyLoads 1 130
+ltrspace 136 nodes 4 123 125 127 128 mat 2 crosssect 2
+ltrspace 137 nodes 4 119 101 121 122 mat 2 crosssect 2
+ltrspace 138 nodes 4 82 122 120 87 mat 2 crosssect 2
+ltrspace 139 nodes 4 76 99 100 123 mat 2 crosssect 2
+ltrspace 140 nodes 4 101 125 121 122 mat 2 crosssect 2
+ltrspace 141 nodes 4 122 104 126 107 mat 2 crosssect 2
+ltrspace 142 nodes 4 99 98 100 123 mat 2 crosssect 2
+ltrspace 143 nodes 4 125 85 109 110 mat 2 crosssect 2
+ltrspace 144 nodes 4 104 110 126 107 mat 2 crosssect 2
+ltrspace 145 nodes 4 98 79 80 111 mat 2 crosssect 2
+ltrspace 146 nodes 4 78 98 77 113 mat 2 crosssect 2
+ltrspace 147 nodes 4 125 111 127 128 mat 2 crosssect 2
+ltrspace 148 nodes 4 128 110 112 92 mat 2 crosssect 2
+ltrspace 149 nodes 4 98 68 77 113 mat 2 crosssect 2
+ltrspace 150 nodes 4 113 111 93 94 mat 2 crosssect 2
+ltrspace 151 nodes 4 128 94 114 89 mat 2 crosssect 2
+ltrspace 152 nodes 4 123 113 115 116 mat 2 crosssect 2
+ltrspace 153 nodes 4 116 128 114 89 mat 2 crosssect 2
+ltrspace 154 nodes 4 73 79 97 125 mat 2 crosssect 2
+ltrspace 155 nodes 4 95 123 115 116 mat 2 crosssect 2
+ltrspace 156 nodes 4 118 116 96 71 mat 2 crosssect 2
+ltrspace 157 nodes 4 99 73 97 125 mat 2 crosssect 2
+ltrspace 158 nodes 4 119 123 117 118 mat 2 crosssect 2
+ltrspace 159 nodes 4 118 122 124 106 mat 2 crosssect 2
+ltrspace 160 nodes 4 76 78 67 95 mat 2 crosssect 2
+ltrspace 161 nodes 4 119 120 82 122 mat 2 crosssect 2
+ltrspace 162 nodes 4 82 87 69 84 mat 2 crosssect 2
+ltrspace 163 nodes 4 76 117 119 123 mat 2 crosssect 2
+ltrspace 164 nodes 4 119 118 120 122 mat 2 crosssect 2
+ltrspace 165 nodes 4 118 88 87 106 mat 2 crosssect 2
+ltrspace 166 nodes 4 76 95 117 123 mat 2 crosssect 2
+ltrspace 167 nodes 4 95 96 118 116 mat 2 crosssect 2
+ltrspace 168 nodes 4 118 71 88 106 mat 2 crosssect 2
+ltrspace 169 nodes 4 99 121 101 125 mat 2 crosssect 2
+ltrspace 170 nodes 4 101 122 102 104 mat 2 crosssect 2
+ltrspace 171 nodes 4 122 105 84 107 mat 2 crosssect 2
+ltrspace 172 nodes 4 99 123 121 125 mat 2 crosssect 2
+ltrspace 173 nodes 4 123 124 122 128 mat 2 crosssect 2
+ltrspace 174 nodes 4 122 128 124 106 mat 2 crosssect 2
+ltrspace 175 nodes 4 78 115 123 113 mat 2 crosssect 2
+ltrspace 176 nodes 4 123 116 124 128 mat 2 crosssect 2
+ltrspace 177 nodes 4 116 90 106 89 mat 2 crosssect 2
+ltrspace 178 nodes 4 73 125 103 85 mat 2 crosssect 2
+ltrspace 179 nodes 4 125 126 104 110 mat 2 crosssect 2
+ltrspace 180 nodes 4 104 107 83 70 mat 2 crosssect 2
+ltrspace 181 nodes 4 98 127 125 111 mat 2 crosssect 2
+ltrspace 182 nodes 4 125 128 126 110 mat 2 crosssect 2
+ltrspace 183 nodes 4 128 108 107 92 mat 2 crosssect 2
+ltrspace 184 nodes 4 98 113 127 111 mat 2 crosssect 2
+ltrspace 185 nodes 4 113 114 128 94 mat 2 crosssect 2
+ltrspace 186 nodes 4 128 89 108 92 mat 2 crosssect 2
+ltrspace 187 nodes 4 66 99 75 119 mat 2 crosssect 2
+ltrspace 188 nodes 4 66 119 81 101 mat 2 crosssect 2
+ltrspace 189 nodes 4 66 74 99 101 mat 2 crosssect 2
+ltrspace 190 nodes 4 99 121 119 101 mat 2 crosssect 2
+ltrspace 191 nodes 4 66 99 119 101 mat 2 crosssect 2
+ltrspace 192 nodes 4 81 101 119 82 mat 2 crosssect 2
+ltrspace 193 nodes 4 101 122 82 102 mat 2 crosssect 2
+ltrspace 194 nodes 4 119 82 101 122 mat 2 crosssect 2
+ltrspace 195 nodes 4 82 102 122 84 mat 2 crosssect 2
+ltrspace 196 nodes 4 122 105 87 84 mat 2 crosssect 2
+ltrspace 197 nodes 4 82 122 87 84 mat 2 crosssect 2
+ltrspace 198 nodes 4 75 99 76 119 mat 2 crosssect 2
+ltrspace 199 nodes 4 99 123 119 121 mat 2 crosssect 2
+ltrspace 200 nodes 4 76 119 99 123 mat 2 crosssect 2
+ltrspace 201 nodes 4 119 121 123 122 mat 2 crosssect 2
+ltrspace 202 nodes 4 123 124 118 122 mat 2 crosssect 2
+ltrspace 203 nodes 4 119 123 118 122 mat 2 crosssect 2
+ltrspace 204 nodes 4 120 122 118 87 mat 2 crosssect 2
+ltrspace 205 nodes 4 122 106 87 105 mat 2 crosssect 2
+ltrspace 206 nodes 4 118 87 122 106 mat 2 crosssect 2
+ltrspace 207 nodes 4 76 100 78 123 mat 2 crosssect 2
+ltrspace 208 nodes 4 78 115 95 123 mat 2 crosssect 2
+ltrspace 209 nodes 4 76 78 95 123 mat 2 crosssect 2
+ltrspace 210 nodes 4 117 123 95 118 mat 2 crosssect 2
+ltrspace 211 nodes 4 123 116 118 124 mat 2 crosssect 2
+ltrspace 212 nodes 4 95 118 123 116 mat 2 crosssect 2
+ltrspace 213 nodes 4 118 124 116 106 mat 2 crosssect 2
+ltrspace 214 nodes 4 116 90 71 106 mat 2 crosssect 2
+ltrspace 215 nodes 4 118 116 71 106 mat 2 crosssect 2
+ltrspace 216 nodes 4 74 73 99 101 mat 2 crosssect 2
+ltrspace 217 nodes 4 73 125 101 103 mat 2 crosssect 2
+ltrspace 218 nodes 4 99 101 73 125 mat 2 crosssect 2
+ltrspace 219 nodes 4 101 103 125 104 mat 2 crosssect 2
+ltrspace 220 nodes 4 125 126 122 104 mat 2 crosssect 2
+ltrspace 221 nodes 4 101 125 122 104 mat 2 crosssect 2
+ltrspace 222 nodes 4 102 104 122 84 mat 2 crosssect 2
+ltrspace 223 nodes 4 104 107 84 83 mat 2 crosssect 2
+ltrspace 224 nodes 4 122 84 104 107 mat 2 crosssect 2
+ltrspace 225 nodes 4 99 97 98 125 mat 2 crosssect 2
+ltrspace 226 nodes 4 98 127 123 125 mat 2 crosssect 2
+ltrspace 227 nodes 4 99 98 123 125 mat 2 crosssect 2
+ltrspace 228 nodes 4 121 125 123 122 mat 2 crosssect 2
+ltrspace 229 nodes 4 125 128 122 126 mat 2 crosssect 2
+ltrspace 230 nodes 4 123 122 125 128 mat 2 crosssect 2
+ltrspace 231 nodes 4 122 106 105 107 mat 2 crosssect 2
+ltrspace 232 nodes 4 122 126 128 107 mat 2 crosssect 2
+ltrspace 233 nodes 4 128 108 106 107 mat 2 crosssect 2
+ltrspace 234 nodes 4 122 128 106 107 mat 2 crosssect 2
+ltrspace 235 nodes 4 100 98 78 123 mat 2 crosssect 2
+ltrspace 236 nodes 4 98 113 123 127 mat 2 crosssect 2
+ltrspace 237 nodes 4 78 123 98 113 mat 2 crosssect 2
+ltrspace 238 nodes 4 123 127 113 128 mat 2 crosssect 2
+ltrspace 239 nodes 4 113 114 116 128 mat 2 crosssect 2
+ltrspace 240 nodes 4 123 113 116 128 mat 2 crosssect 2
+ltrspace 241 nodes 4 124 128 116 106 mat 2 crosssect 2
+ltrspace 242 nodes 4 128 89 106 108 mat 2 crosssect 2
+ltrspace 243 nodes 4 116 106 128 89 mat 2 crosssect 2
+ltrspace 244 nodes 4 73 65 79 85 mat 2 crosssect 2
+ltrspace 245 nodes 4 79 109 125 85 mat 2 crosssect 2
+ltrspace 246 nodes 4 73 79 125 85 mat 2 crosssect 2
+ltrspace 247 nodes 4 103 85 125 104 mat 2 crosssect 2
+ltrspace 248 nodes 4 85 110 104 86 mat 2 crosssect 2
+ltrspace 249 nodes 4 125 104 85 110 mat 2 crosssect 2
+ltrspace 250 nodes 4 104 86 110 70 mat 2 crosssect 2
+ltrspace 251 nodes 4 110 91 107 70 mat 2 crosssect 2
+ltrspace 252 nodes 4 104 110 107 70 mat 2 crosssect 2
+ltrspace 253 nodes 4 97 79 98 125 mat 2 crosssect 2
+ltrspace 254 nodes 4 79 111 125 109 mat 2 crosssect 2
+ltrspace 255 nodes 4 98 125 79 111 mat 2 crosssect 2
+ltrspace 256 nodes 4 125 109 111 110 mat 2 crosssect 2
+ltrspace 257 nodes 4 111 112 128 110 mat 2 crosssect 2
+ltrspace 258 nodes 4 125 111 128 110 mat 2 crosssect 2
+ltrspace 259 nodes 4 126 110 128 107 mat 2 crosssect 2
+ltrspace 260 nodes 4 110 92 107 91 mat 2 crosssect 2
+ltrspace 261 nodes 4 128 107 110 92 mat 2 crosssect 2
+ltrspace 262 nodes 4 98 80 68 111 mat 2 crosssect 2
+ltrspace 263 nodes 4 68 93 113 111 mat 2 crosssect 2
+ltrspace 264 nodes 4 98 68 113 111 mat 2 crosssect 2
+ltrspace 265 nodes 4 127 111 113 128 mat 2 crosssect 2
+ltrspace 266 nodes 4 111 94 128 112 mat 2 crosssect 2
+ltrspace 267 nodes 4 113 128 111 94 mat 2 crosssect 2
+ltrspace 268 nodes 4 128 112 94 92 mat 2 crosssect 2
+ltrspace 269 nodes 4 94 72 89 92 mat 2 crosssect 2
+ltrspace 270 nodes 4 128 94 89 92 mat 2 crosssect 2
+SimpleCS 1 thick 1 width 1
+SimpleCS 2 thick 1 width 1
+IsoLE 1 tAlpha 0.000012 d 500e7 E 550e5 n 0.2
+IsoLE 2 tAlpha 0.000012 d 550e7 E 500e5 n 0.2
+BoundaryCondition 1 loadTimeFunction 1 prescribedValue 0
+NodalLoad 2 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 3 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 4 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 5 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 6 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 7 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 8 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 9 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 10 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 11 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 12 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 13 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 14 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 15 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 16 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 17 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 18 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 19 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 20 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 21 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 22 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 23 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 24 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 25 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 26 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 27 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 28 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 29 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 30 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 31 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 32 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 33 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 34 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 35 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 36 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 37 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 38 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 39 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 40 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 41 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 42 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 43 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 44 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 45 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 46 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 47 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 48 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 49 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 50 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 51 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 52 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 53 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 54 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 55 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 56 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 57 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 58 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 59 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 60 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 61 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 62 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 63 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 64 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 65 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 66 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 67 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 68 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 69 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 70 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 71 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 72 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 73 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 74 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 75 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 76 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 77 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 78 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 79 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 80 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 81 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 82 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 83 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 84 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 85 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 86 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 87 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 88 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 89 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 90 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 91 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 92 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 93 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 94 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 95 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 96 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 97 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 98 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 99 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 100 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 101 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 102 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 103 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 104 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 105 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 106 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 107 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 108 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 109 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 110 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 111 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 112 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 113 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 114 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 115 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 116 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 117 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 118 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 119 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 120 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 121 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 122 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 123 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 124 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 125 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 126 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 127 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 128 loadTimeFunction 1 Components 3 0 0 0
+NodalLoad 129 loadTimeFunction 1 Components 3 0 0 0
+DeadWeight 130 loadTimeFunction 2 Components 3 0 0 -1e-5
+ConstantFunction 1 f(t) 1.0
+ConstantFunction 2 f(t) 1.0
