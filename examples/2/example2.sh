@@ -1,6 +1,6 @@
 NAME=example2
 OOFEMBASE=/tmp/$NAME-oofem
-YADE=yade-trunk
+YADE=$HOME/femdem/yade/build/bins/yade # corresponds to $TOP in downloadAndInstall. Change it accordingly if you modified it
 PREPROC=true
 MESH=false
 RUN=true
