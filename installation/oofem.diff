@@ -1,0 +1,176 @@
+diff -rNw -U 0 oofem-2.4/bindings/python/oofemlib.cpp oofem-2.4/bindings/python/oofemlib.cpp
+--- oofem-2.4/bindings/python/oofemlib.cpp
++++ oofem-2.4/bindings/python/oofemlib.cpp
+@@ -83,0 +84 @@
++#include "nodalload.h"
+@@ -130,0 +132,2 @@
++std::vector<double>::const_iterator (FloatArray::*floatarray_begin)() const = &FloatArray::begin;
++std::vector<double>::const_iterator (FloatArray::*floatarray_end)() const = &FloatArray::end;
+@@ -176,0 +180 @@
++        .def("__iter__", bp::range(floatarray_begin,floatarray_end))
+@@ -236,0 +241,3 @@
++std::vector<int>::const_iterator (IntArray::*intarray_begin)() const = &IntArray::begin;
++std::vector<int>::const_iterator (IntArray::*intarray_end)() const = &IntArray::end;
++
+@@ -255,0 +263 @@
++        .def("__iter__", bp::range(intarray_begin,intarray_end))
+@@ -366 +374,11 @@
+-Element* (SpatialLocalizer::*giveElementContainingPoint_1)(const FloatArray &coords, const IntArray* regionList) = &SpatialLocalizer::giveElementContainingPoint;
++class PySpatialLocalizer : public SpatialLocalizer, public wrapper<SpatialLocalizer>
++{
++public:
++    PySpatialLocalizer(Domain* d) : SpatialLocalizer(d) {}
++    virtual Element* giveElementContainingPoint(const FloatArray &coords, const IntArray* regionList) {
++        return this->get_override("giveElementContainingPoint")(coords,regionList);
++    }
++};
++
++Element* (SpatialLocalizer::*giveElementContainingPoint_1)(const FloatArray&, const IntArray*) = &SpatialLocalizer::giveElementContainingPoint;
++
+@@ -369 +387 @@
+-    class_<SpatialLocalizer, boost::noncopyable>("SpatialLocalizer", no_init)
++    class_<PySpatialLocalizer, boost::noncopyable>("SpatialLocalizer", no_init)
+@@ -371,4 +389,3 @@
+-        // XXX .def("giveElementCloseToPoint", &SpatialLocalizer::giveElementCloseToPoint, return_internal_reference<>())
+-        .def("giveElementClosestToPoint", &SpatialLocalizer::giveElementClosestToPoint, return_internal_reference<>())
+-        .def("init", &SpatialLocalizer::init)
+-        .def("giveClassName", &SpatialLocalizer::giveClassName)
++        .def("giveElementClosestToPoint", &PySpatialLocalizer::giveElementClosestToPoint, return_internal_reference<>())
++        .def("init", &PySpatialLocalizer::init)
++        .def("giveClassName", &PySpatialLocalizer::giveClassName)
+@@ -493,0 +511,2 @@
++        .def("resizeModules", &ExportModuleManager::resizeModules)
++        .def("setModule", &ExportModuleManager::setModule)
+@@ -519,0 +539 @@
++        .def("initialize", &ExportModule::initialize)
+@@ -627,0 +648,2 @@
++
++        .def("giveDomainType", &Domain::giveDomainType)
+@@ -691,0 +714 @@
++        .def("giveNumberOfDofs", &DofManager::giveNumberOfDofs)
+@@ -770 +793 @@
+-        .def("giveDofManArray", &Element::giveDofManager, return_value_policy<reference_existing_object>())
++        .def("giveDofManArray", &Element::giveDofManArray, return_value_policy<reference_existing_object>())
+@@ -883 +906 @@
+-        .def("giveComponentArray", &Load::GiveCopyOfComponentArray,return_value_policy<manage_new_object>())
++        .def("GiveCopyOfComponentArray", &Load::GiveCopyOfComponentArray, return_value_policy<manage_new_object>())
+@@ -886,0 +910,19 @@
++void pyclass_NodalLoad()
++{
++    class_<NodalLoad, bases<Load>, boost::noncopyable >("NodalLoad", init<int, Domain*>())
++        .def("setComponentArray", &NodalLoad::setComponentArray)
++        .def("GiveCopyOfComponentArray", &NodalLoad::GiveCopyOfComponentArray, return_value_policy<manage_new_object>())
++        .def("computeValueAt", pure_virtual( &NodalLoad::computeValueAt))
++        .def("setFunction", &NodalLoad::setFunction)
++        ;
++}
++
++
++/*****************************************************
++* InitialCondition
++*****************************************************/
++void pyclass_InitialCondition()
++{
++    class_<InitialCondition, bases<FEMComponent>, boost::noncopyable >("InitialCondition", no_init)
++        ;
++}
+@@ -1336 +1378 @@
+-        "print ret\n"
++        //"print ret\n"
+@@ -1539 +1580,0 @@
+-object nodalLoad(bp::tuple args, bp::dict kw) { return CreateBCOfType("nodalload",args,kw); }
+@@ -1541,0 +1583,27 @@
++object nodalLoad(bp::tuple args, bp::dict kw)
++{
++    int number =     len(args)>0? extract<int>(args[0])() : 0;
++    Domain *domain = len(args)>1? extract<Domain*>(args[1])() : NULL;
++    NodalLoad *load = new NodalLoad(number,domain);
++    OOFEMTXTInputRecord ir = makeOOFEMTXTInputRecordFrom(kw);
++    load->initializeFrom(&ir);
++    return object(ptr(load));
++}
++
++
++/*****************************************************
++* InitialCondition
++*****************************************************/
++// intialCondition(aClass,domain=defaultDomain,**kw)
++object initialCondition(bp::tuple args, bp::dict kw)
++{
++    string aClass = extract<string>(args[0])();
++    int number =     len(args)>1? extract<int>(args[1])() : 0;
++    Domain *domain = len(args)>2? extract<Domain*>(args[2])() : NULL;
++    InitialCondition *ic = classFactory.createInitialCondition(aClass.c_str(),number,domain);
++    if (ic==NULL) { OOFEM_LOG_ERROR("InitialCondition: wrong input data"); }
++    OOFEMTXTInputRecord ir = makeOOFEMTXTInputRecordFrom(kw);
++    ic->initializeFrom(&ir);
++    return object(ptr(ic));
++}
++
+@@ -1610,0 +1679 @@
++object constantFunction(bp::tuple args, bp::dict kw) { return CreateLoadTimeFunctionOfType("constantfunction",args,kw); }
+@@ -1671,0 +1741,2 @@
++    pyclass_NodalLoad();
++    pyclass_InitialCondition();
+@@ -1724 +1794,0 @@
+-    def("nodalLoad", raw_function(nodalLoad,0));
+@@ -1726,0 +1797,2 @@
++    def("initialCondition", raw_function(initialCondition,0));
++
+@@ -1734,0 +1807 @@
++    def("constantFunction", raw_function(constantFunction,0));
+diff -rNw -U 0 oofem-2.4/bindings/python/test2.py oofem-2.4/bindings/python/test2.py
+--- oofem-2.4/bindings/python/test2.py
++++ oofem-2.4/bindings/python/test2.py
+@@ -63,0 +64 @@
++domain.resizeMaterials(1)
+@@ -64,0 +66 @@
++domain.resizeCrossSectionModels(1)
+@@ -68,0 +71 @@
++domain.resizeFunctions(len(ltfs))
+diff -rNw -U 0 oofem-2.4/src/oofemlib/generalboundarycondition.h oofem-2.4/src/oofemlib/generalboundarycondition.h
+--- oofem-2.4/src/oofemlib/generalboundarycondition.h
++++ oofem-2.4/src/oofemlib/generalboundarycondition.h
+@@ -123,0 +124,2 @@
++    void setFunction(int i) { timeFunction = i; }
++
+diff -rNw -U 0 oofem-2.4/src/oofemlib/load.C oofem-2.4/src/oofemlib/load.C
+--- oofem-2.4/src/oofemlib/load.C
++++ oofem-2.4/src/oofemlib/load.C
+@@ -54,0 +55,8 @@
++FloatArray*
++Load :: GiveCopyOfComponentArray() const
++{
++    FloatArray* ret = new FloatArray();
++    ret->beCopyOf(componentArray);
++    return ret;
++}
++
+diff -rNw -U 0 oofem-2.4/src/oofemlib/load.h oofem-2.4/src/oofemlib/load.h
+--- oofem-2.4/src/oofemlib/load.h
++++ oofem-2.4/src/oofemlib/load.h
+@@ -171,0 +172 @@
++    FloatArray* GiveCopyOfComponentArray() const;
+diff -rNw -U 0 oofem-2.4/src/oofemlib/modulemanager.h oofem-2.4/src/oofemlib/modulemanager.h
+--- oofem-2.4/src/oofemlib/modulemanager.h
++++ oofem-2.4/src/oofemlib/modulemanager.h
+@@ -148,0 +149,8 @@
++    void setModule(int i, M* obj) {
++        moduleList[i-1].reset(obj);
++    }
++
++    void resizeModules(int _newSize) {
++        moduleList.resize(_newSize);
++    }
++
+diff -rNw -U 0 oofem-2.4/src/sm/EngineeringModels/deidynamic.C oofem-2.4/src/sm/EngineeringModels/deidynamic.C
+--- oofem-2.4/src/sm/EngineeringModels/deidynamic.C
++++ oofem-2.4/src/sm/EngineeringModels/deidynamic.C
+@@ -137,0 +138,2 @@
++    deltaT = tStep->giveTimeIncrement();
++
+diff -rNw -U 0 oofem-2.4/src/sm/EngineeringModels/nldeidynamic.C oofem-2.4/src/sm/EngineeringModels/nldeidynamic.C
+--- oofem-2.4/src/sm/EngineeringModels/nldeidynamic.C
++++ oofem-2.4/src/sm/EngineeringModels/nldeidynamic.C
+@@ -196,0 +197 @@
++    deltaT = tStep->giveTimeIncrement();
