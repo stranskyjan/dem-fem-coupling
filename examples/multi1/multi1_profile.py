@@ -1,0 +1,21 @@
+import sys; sys.path.append("..")
+from profiler import *
+
+stats = StatsWrapper('/tmp/multi1.pro')
+tot = stats.getKeyByName('solveAt','demfemcoupling.py')
+getForcesFromDem = stats.getKeyByName('getStressFromDem','demfemcoupling')
+applyForcesOnFem = stats.getKeyByName('applyStressOnFem','demfemcoupling')
+getDsplFromFem = stats.getKeyByName('getStrainFromFem','demfemcoupling')
+applyDsplOnDem = stats.getKeyByName('applyStrainOnDem','demfemcoupling')
+yadeSolve = stats.getKeyByNameAndLine('solve',193)
+oofemSolve = stats.getKeyByNameAndLine('solve',135)
+
+printer = StatsPrinter(tot.totTime,25)
+printer.add('total time for solution',tot.totTime)
+printer.add('getForcesFromDem',getForcesFromDem.totTime)
+printer.add('applyForcesOnFem',applyForcesOnFem.totTime)
+printer.add('getDsplFromFem',getDsplFromFem.totTime)
+printer.add('applyDsplOnDem',applyDsplOnDem.totTime)
+printer.add('yadeSolve',yadeSolve.totTime)
+printer.add('oofemSolve',oofemSolve.totTime)
+printer.pprint()

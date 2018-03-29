@@ -1,0 +1,21 @@
+import sys; sys.path.append("..")
+from profiler import *
+
+stats = StatsWrapper('/tmp/surf1.pro')
+tot = stats.getKeyByName('solveAt','demfemcoupling.py')
+getForcesFromDem = stats.getKeyByName('getForcesFromDem','demfemcoupling')
+applyForcesOnFem = stats.getKeyByName('applyForcesOnFem','demfemcoupling')
+getDsplFromFem = stats.getKeyByName('getDsplFromFem','demfemcoupling')
+applyDsplOnDem = stats.getKeyByName('applyDsplOnDem','demfemcoupling')
+yadeSolve = stats.getKeyByNameAndLine('solve',193)
+oofemSolve = stats.getKeyByNameAndLine('solve',135)
+
+printer = StatsPrinter(tot.totTime,25)
+printer.add('total time for solution',tot.totTime)
+printer.add('getForcesFromDem',getForcesFromDem.totTime)
+printer.add('applyForcesOnFem',applyForcesOnFem.totTime)
+printer.add('getDsplFromFem',getDsplFromFem.totTime)
+printer.add('applyDsplOnDem',applyDsplOnDem.totTime)
+printer.add('yadeSolve',yadeSolve.totTime)
+printer.add('oofemSolve',oofemSolve.totTime)
+printer.pprint()
