@@ -6,7 +6,7 @@ and
 softwares.
 
 ### Usage
-There is [downloadAndInstall shell script](installation/downloadAndInstall), which downloads, compiles and installs all necessary softwares. It also modifies some part of source codes to make them all compatible.
+There is [downloadAndInstall shell script](installation/downloadAndInstall.sh), which downloads, compiles and installs all necessary softwares. It also modifies some part of source codes to make them all compatible.
 
 Compilation and examples was tested on [Ubuntu 16.04 LTS](http://www.ubuntu.com/) system.
 Postprocessing was done using [Paraview 5.0.1](https://www.paraview.org/).
