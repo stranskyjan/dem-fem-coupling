@@ -19,6 +19,7 @@ See [examples](examples) directory.
 - [J. Stranský. FEM – DEM coupling and MuPIF framework. Engineering Mechanics 2013](http://www.engmech.cz/2013/im/doc/Book_of_EAi.pdf)
 - [J. Stranský. Open source DEM–FEM coupling, Particles 2013](http://congress.cimne.com/particles2013/proceedings/full/p182.pdf)
 - [J. Stranský. Combination of FEM and DEM with application to railway ballast-sleeper interaction, Engineering Mechanics 2014](http://www.engmech.cz/2014/im/doc/EM2014_proceedings.pdf)
+- [J. Stranský. Mesoscale Discrete Element Model for Concrete and Its Combination with FEM, Ph.D. thesis](https://github.com/stranskyjan/phd-thesis)
 
 ### Acknowledgement
 - To [Weimin Song](https://www.researchgate.net/profile/Weimin_Song)
