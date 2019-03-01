@@ -7,7 +7,6 @@
 #
 # Tested on Ubuntu 16.04 LTS system
 # enjoy
-# Jan Stransky <jan.stransky@fsv.cvut.cz>
 #
 
 #=====================================================================
