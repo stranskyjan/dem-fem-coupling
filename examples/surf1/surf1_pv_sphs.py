@@ -17,19 +17,13 @@ warpByVector1Display = Show(warpByVector1, renderView)
 Hide(fem, renderView)
 
 warpByVector1Display.SetRepresentationType('Surface With Edges')
-ColorBy(warpByVector1Display, ('POINTS', 'IST_StressTensor'))
+ColorBy(warpByVector1Display, ('POINTS', 'IST_StressTensor', '8'))
 
-iSTStressTensorLUT = GetColorTransferFunction('ISTStressTensor')
-iSTStressTensorLUT.RGBPoints = [0.0, 0.231373, 0.298039, 0.752941, 5e-17, 0.865003, 0.865003, 0.865003, 1e-16, 0.705882, 0.0156863, 0.14902]
-iSTStressTensorLUT.ScalarRangeInitialized = 1.0
-iSTStressTensorLUT.VectorComponent = 8
-iSTStressTensorLUT.VectorMode = 'Component'
+iSTStressTensorLUT = GetColorTransferFunction('IST_StressTensor')
 iSTStressTensorLUT.ApplyPreset('Warm to Cool', True)
 iSTStressTensorLUT.RescaleTransferFunction(-300000.0, 300000.0)
 
-iSTStressTensorPWF = GetOpacityTransferFunction('ISTStressTensor')
-iSTStressTensorPWF.Points = [0.0, 0.0, 0.5, 0.0, 1e-16, 1.0, 0.5, 0.0]
-iSTStressTensorPWF.ScalarRangeInitialized = 1
+iSTStressTensorPWF = GetOpacityTransferFunction('IST_StressTensor')
 iSTStressTensorPWF.RescaleTransferFunction(-300000.0, 300000.0)
 
 # DEM

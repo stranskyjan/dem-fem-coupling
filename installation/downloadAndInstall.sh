@@ -5,7 +5,7 @@
 #
 # prerequisites: wget, unzip, cmake, tar, patch
 #
-# Tested on Ubuntu 16.04 LTS system
+# Tested on Ubuntu 18.04 LTS system
 # enjoy
 #
 
@@ -53,12 +53,12 @@ done
 # OOFEM
 #=====================================================================
 if $oofem; then
-	oofemtmp=$tmp/oofem-2.4
+	oofemtmp=$tmp/oofem-2.5
 	rm -rf $oofemtmp $oofemtmp.zip $oofem_dir
-	# download and unzip oofem-2.3.zip
-	wget http://www.oofem.org/cgi-bin/OOFEM/download.cgi?download=oofem-2.4.zip -O $oofemtmp.zip
+	# download and unzip oofem-2.5.zip
+	wget http://www.oofem.org/cgi-bin/OOFEM/download.cgi?download=oofem-2.5.zip -O $oofemtmp.zip
 	cd $tmp
-	unzip -q $oofemtmp.zip
+	unzip -q -o $oofemtmp.zip
 	# modifiy the source code
 	patch -s -p0 < $script_dir/oofem.diff
 	#
@@ -68,6 +68,10 @@ if $oofem; then
 	mkdir -p $oofem_dir/build
 	cd $oofem_dir/build
 	cmake -DUSE_PYTHON_BINDINGS=ON $oofem_dir/source
+	liboofemcmake=$oofem_dir/build/CMakeFiles/liboofem.dir/flags.make
+	# remove compilation flags causing ImportError before running make
+	sed -i 's/-fvisibility=hidden//' $liboofemcmake
+	sed -i 's/-fvisibility-inlines-hidden//' $liboofemcmake
 	echo
 	echo "Compiling oofem, takes some time..."
 	echo
@@ -83,13 +87,13 @@ fi
 #=====================================================================
 if $yade; then
 	#
-	yadeversion=2017.01a
+	yadeversion=2019.01a
 	yadetmp=$tmp/yade-$yadeversion
 	rm -rf $yadetmp $yadetmp.tar.gz $yade_dir
 	# download and extract yade
-	wget https://launchpad.net/yade/trunk/yade-1.00.0/+download/yade-$yadeversion.tar.gz -O $yadetmp.tar.gz
+	wget https://launchpad.net/yade/trunk/yade-1.00.0/+download/yade_$yadeversion.tar.bz2 -O $yadetmp.tar.bz2
 	cd $tmp
-	tar xfz $yadetmp.tar.gz
+	tar xfj $yadetmp.tar.bz2
 	mv trunk-$yadeversion $yadetmp
 	# modifiy the source code
 	patch -s -p0 < $script_dir/yade.diff
@@ -101,10 +105,12 @@ if $yade; then
 	mkdir -p $yade_dir/build $yade_dir/install
 	cd $yade_dir/build
 	cmake \
-		-DINSTALL_PREFIX=$yade_dir/install \
+		-DCMAKE_INSTALL_PREFIX=$yade_dir/install \
 		-DENABLE_LINSOLV=OFF \
 		-DENABLE_PFVFLOW=OFF \
 		-DENABLE_LBMFLOW=OFF \
+		-DENABLE_TWOPHASEFLOW=OFF \
+		-DENABLE_GL2PS=OFF \
 		-DNOSUFFIX=ON \
 		$yade_dir/source
 	echo

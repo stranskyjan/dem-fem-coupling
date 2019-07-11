@@ -18,13 +18,13 @@ Hide(fem, renderView)
 warpByVector1Display.SetRepresentationType('Surface With Edges')
 ColorBy(warpByVector1Display, ('CELLS', 'IST_ElementNumber'))
 
-iSTElementNumberLUT = GetColorTransferFunction('ISTElementNumber')
+iSTElementNumberLUT = GetColorTransferFunction('IST_ElementNumber')
 iSTElementNumberLUT.RGBPoints = [1.0, 0.0, 0.0, 1.0, 3.0, 1.0, 0.0, 0.0]
 iSTElementNumberLUT.ColorSpace = 'HSV'
 iSTElementNumberLUT.NanColor = [0.498039215686, 0.498039215686, 0.498039215686]
 iSTElementNumberLUT.ScalarRangeInitialized = 1.0
 
-iSTElementNumberPWF = GetOpacityTransferFunction('ISTElementNumber')
+iSTElementNumberPWF = GetOpacityTransferFunction('IST_ElementNumber')
 iSTElementNumberPWF.Points = [1.0, 0.0, 0.5, 0.0, 3.0, 1.0, 0.5, 0.0]
 iSTElementNumberPWF.ScalarRangeInitialized = 1
 

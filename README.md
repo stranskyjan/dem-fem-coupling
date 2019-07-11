@@ -6,11 +6,11 @@ and
 softwares.
 
 ## Compatibility
-Compilation and examples were tested on [Ubuntu 16.04 LTS](http://www.ubuntu.com/) system.
-Postprocessing was done using [Paraview 5.0.1](https://www.paraview.org/).
-
-On Ubuntu 18.04, there were some compilation issues and postprocessing issues.
-Currently I am out of time to fix it..
+Compilation and examples were tested on [Ubuntu 18.04 LTS](http://www.ubuntu.com/) system,
+using OOFEM 2.5
+and
+YADE 2019.01a.
+Postprocessing was done using [Paraview 5.4.1](https://www.paraview.org/).
 
 ## Installation
 There is [downloadAndInstall shell script](installation/downloadAndInstall.sh), which downloads, compiles and installs all necessary softwares.

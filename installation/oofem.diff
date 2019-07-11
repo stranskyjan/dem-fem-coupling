@@ -1,20 +1,19 @@
-diff -rNw -U 0 oofem-2.4/bindings/python/oofemlib.cpp oofem-2.4/bindings/python/oofemlib.cpp
---- oofem-2.4/bindings/python/oofemlib.cpp
-+++ oofem-2.4/bindings/python/oofemlib.cpp
-@@ -83,0 +84 @@
+diff -rNw -U 0 oofem-2.5/bindings/python/oofemlib.cpp oofem-2.5/bindings/python/oofemlib.cpp
+--- oofem-2.5/bindings/python/oofemlib.cpp
++++ oofem-2.5/bindings/python/oofemlib.cpp
+@@ -60,0 +61 @@
 +#include "nodalload.h"
-@@ -130,0 +132,2 @@
+@@ -224,0 +226,2 @@
 +std::vector<double>::const_iterator (FloatArray::*floatarray_begin)() const = &FloatArray::begin;
 +std::vector<double>::const_iterator (FloatArray::*floatarray_end)() const = &FloatArray::end;
-@@ -176,0 +180 @@
+@@ -264,0 +268 @@
 +        .def("__iter__", bp::range(floatarray_begin,floatarray_end))
-@@ -236,0 +241,3 @@
+@@ -324,0 +329,2 @@
 +std::vector<int>::const_iterator (IntArray::*intarray_begin)() const = &IntArray::begin;
 +std::vector<int>::const_iterator (IntArray::*intarray_end)() const = &IntArray::end;
-+
-@@ -255,0 +263 @@
+@@ -343,0 +350 @@
 +        .def("__iter__", bp::range(intarray_begin,intarray_end))
-@@ -366 +374,11 @@
+@@ -454 +461,11 @@
 -Element* (SpatialLocalizer::*giveElementContainingPoint_1)(const FloatArray &coords, const IntArray* regionList) = &SpatialLocalizer::giveElementContainingPoint;
 +class PySpatialLocalizer : public SpatialLocalizer, public wrapper<SpatialLocalizer>
 +{
@@ -27,10 +26,10 @@ diff -rNw -U 0 oofem-2.4/bindings/python/oofemlib.cpp oofem-2.4/bindings/python/
 +
 +Element* (SpatialLocalizer::*giveElementContainingPoint_1)(const FloatArray&, const IntArray*) = &SpatialLocalizer::giveElementContainingPoint;
 +
-@@ -369 +387 @@
+@@ -457 +474 @@
 -    class_<SpatialLocalizer, boost::noncopyable>("SpatialLocalizer", no_init)
 +    class_<PySpatialLocalizer, boost::noncopyable>("SpatialLocalizer", no_init)
-@@ -371,4 +389,3 @@
+@@ -459,4 +476,3 @@
 -        // XXX .def("giveElementCloseToPoint", &SpatialLocalizer::giveElementCloseToPoint, return_internal_reference<>())
 -        .def("giveElementClosestToPoint", &SpatialLocalizer::giveElementClosestToPoint, return_internal_reference<>())
 -        .def("init", &SpatialLocalizer::init)
@@ -38,23 +37,14 @@ diff -rNw -U 0 oofem-2.4/bindings/python/oofemlib.cpp oofem-2.4/bindings/python/
 +        .def("giveElementClosestToPoint", &PySpatialLocalizer::giveElementClosestToPoint, return_internal_reference<>())
 +        .def("init", &PySpatialLocalizer::init)
 +        .def("giveClassName", &PySpatialLocalizer::giveClassName)
-@@ -493,0 +511,2 @@
+@@ -588,0 +605,2 @@
 +        .def("resizeModules", &ExportModuleManager::resizeModules)
 +        .def("setModule", &ExportModuleManager::setModule)
-@@ -519,0 +539 @@
+@@ -614,0 +633 @@
 +        .def("initialize", &ExportModule::initialize)
-@@ -627,0 +648,2 @@
-+
+@@ -722,0 +742 @@
 +        .def("giveDomainType", &Domain::giveDomainType)
-@@ -691,0 +714 @@
-+        .def("giveNumberOfDofs", &DofManager::giveNumberOfDofs)
-@@ -770 +793 @@
--        .def("giveDofManArray", &Element::giveDofManager, return_value_policy<reference_existing_object>())
-+        .def("giveDofManArray", &Element::giveDofManArray, return_value_policy<reference_existing_object>())
-@@ -883 +906 @@
--        .def("giveComponentArray", &Load::GiveCopyOfComponentArray,return_value_policy<manage_new_object>())
-+        .def("GiveCopyOfComponentArray", &Load::GiveCopyOfComponentArray, return_value_policy<manage_new_object>())
-@@ -886,0 +910,19 @@
+@@ -989,0 +1010,18 @@
 +void pyclass_NodalLoad()
 +{
 +    class_<NodalLoad, bases<Load>, boost::noncopyable >("NodalLoad", init<int, Domain*>())
@@ -65,7 +55,6 @@ diff -rNw -U 0 oofem-2.4/bindings/python/oofemlib.cpp oofem-2.4/bindings/python/
 +        ;
 +}
 +
-+
 +/*****************************************************
 +* InitialCondition
 +*****************************************************/
@@ -74,12 +63,54 @@ diff -rNw -U 0 oofem-2.4/bindings/python/oofemlib.cpp oofem-2.4/bindings/python/
 +    class_<InitialCondition, bases<FEMComponent>, boost::noncopyable >("InitialCondition", no_init)
 +        ;
 +}
-@@ -1336 +1378 @@
--        "print ret\n"
-+        //"print ret\n"
-@@ -1539 +1580,0 @@
+@@ -1422,0 +1461 @@
++	 /*
+@@ -1442,0 +1482,40 @@
++	*/
++	bp::str ret = "";
++	bp::list items = kw.items();
++	for (int i=0; i<bp::len(items); i++) {
++		const bp::object& okey = items[i][0];
++		str key(okey);
++		key = key.lower();
++		if (key == "f_t") key = "f(t)";
++		ret += " ";
++		ret += key;
++		const bp::object& val = items[i][1];
++		auto oname = val.attr("__class__").attr("__name__");
++		string name = bp::extract<string>(oname)();
++		if (name == "bool") continue;
++		else if (name == "int" || name == "float" || name == "str") {
++			ret += " ";
++			ret += bp::str(val);
++		}
++		else if (name == "list" || name == "tuple") {
++			ret += " ";
++			int l = len(val);
++			ret += str(l);
++			for (int j=0; j<l; j++) {
++				const bp::object& val2 = val[j];
++				auto oname2 = val2.attr("__class__").attr("__name__");
++				string name2 = bp::extract<string>(oname2)();
++				ret += " ";
++				if (name2 == "int" || name2 == "float" || name2 == "str") {
++					ret += str(val2);
++				} else {
++					ret += str(val2.attr("giveNumber")());
++				}
++			}
++		}
++		else {
++			ret += " ";
++			ret += str(val.attr("giveNumber")());
++		}
++	}
++	ret = ret.lower();
+@@ -1445 +1524 @@
+-    return OOFEMTXTInputRecord( 0, ( extract<string>(temp["ret"])() ) );
++    return OOFEMTXTInputRecord( 0, extract<string>(ret)() );
+@@ -1645 +1724,9 @@
 -object nodalLoad(bp::tuple args, bp::dict kw) { return CreateBCOfType("nodalload",args,kw); }
-@@ -1541,0 +1583,27 @@
 +object nodalLoad(bp::tuple args, bp::dict kw)
 +{
 +    int number =     len(args)>0? extract<int>(args[0])() : 0;
@@ -89,8 +120,7 @@ diff -rNw -U 0 oofem-2.4/bindings/python/oofemlib.cpp oofem-2.4/bindings/python/
 +    load->initializeFrom(&ir);
 +    return object(ptr(load));
 +}
-+
-+
+@@ -1647,0 +1735,17 @@
 +/*****************************************************
 +* InitialCondition
 +*****************************************************/
@@ -107,37 +137,38 @@ diff -rNw -U 0 oofem-2.4/bindings/python/oofemlib.cpp oofem-2.4/bindings/python/
 +    return object(ptr(ic));
 +}
 +
-@@ -1610,0 +1679 @@
++
+@@ -1716,0 +1821 @@
 +object constantFunction(bp::tuple args, bp::dict kw) { return CreateLoadTimeFunctionOfType("constantfunction",args,kw); }
-@@ -1671,0 +1741,2 @@
+@@ -1798,0 +1904,2 @@
 +    pyclass_NodalLoad();
 +    pyclass_InitialCondition();
-@@ -1724 +1794,0 @@
--    def("nodalLoad", raw_function(nodalLoad,0));
-@@ -1726,0 +1797,2 @@
+@@ -1857,0 +1965 @@
 +    def("initialCondition", raw_function(initialCondition,0));
-+
-@@ -1734,0 +1807 @@
+@@ -1866,0 +1975 @@
 +    def("constantFunction", raw_function(constantFunction,0));
-diff -rNw -U 0 oofem-2.4/bindings/python/test2.py oofem-2.4/bindings/python/test2.py
---- oofem-2.4/bindings/python/test2.py
-+++ oofem-2.4/bindings/python/test2.py
-@@ -63,0 +64 @@
-+domain.resizeMaterials(1)
-@@ -64,0 +66 @@
-+domain.resizeCrossSectionModels(1)
-@@ -68,0 +71 @@
-+domain.resizeFunctions(len(ltfs))
-diff -rNw -U 0 oofem-2.4/src/oofemlib/generalboundarycondition.h oofem-2.4/src/oofemlib/generalboundarycondition.h
---- oofem-2.4/src/oofemlib/generalboundarycondition.h
-+++ oofem-2.4/src/oofemlib/generalboundarycondition.h
-@@ -123,0 +124,2 @@
+diff -rNw -U 0 oofem-2.5/src/oofemlib/exportmodulemanager.h oofem-2.5/src/oofemlib/exportmodulemanager.h
+--- oofem-2.5/src/oofemlib/exportmodulemanager.h
++++ oofem-2.5/src/oofemlib/exportmodulemanager.h
+@@ -71,0 +72,8 @@
++
++    void setModule(int i, ExportModule* obj) {
++        moduleList[i-1].reset(obj);
++    }
++
++    void resizeModules(int _newSize) {
++        moduleList.resize(_newSize);
++    }
+diff -rNw -U 0 oofem-2.5/src/oofemlib/generalboundarycondition.h oofem-2.5/src/oofemlib/generalboundarycondition.h
+--- oofem-2.5/src/oofemlib/generalboundarycondition.h
++++ oofem-2.5/src/oofemlib/generalboundarycondition.h
+@@ -160,0 +161,2 @@
 +    void setFunction(int i) { timeFunction = i; }
 +
-diff -rNw -U 0 oofem-2.4/src/oofemlib/load.C oofem-2.4/src/oofemlib/load.C
---- oofem-2.4/src/oofemlib/load.C
-+++ oofem-2.4/src/oofemlib/load.C
-@@ -54,0 +55,8 @@
+diff -rNw -U 0 oofem-2.5/src/oofemlib/load.C oofem-2.5/src/oofemlib/load.C
+--- oofem-2.5/src/oofemlib/load.C
++++ oofem-2.5/src/oofemlib/load.C
+@@ -159,0 +160,8 @@
 +FloatArray*
 +Load :: GiveCopyOfComponentArray() const
 +{
@@ -146,31 +177,27 @@ diff -rNw -U 0 oofem-2.4/src/oofemlib/load.C oofem-2.4/src/oofemlib/load.C
 +    return ret;
 +}
 +
-diff -rNw -U 0 oofem-2.4/src/oofemlib/load.h oofem-2.4/src/oofemlib/load.h
---- oofem-2.4/src/oofemlib/load.h
-+++ oofem-2.4/src/oofemlib/load.h
-@@ -171,0 +172 @@
+diff -rNw -U 0 oofem-2.5/src/oofemlib/load.h oofem-2.5/src/oofemlib/load.h
+--- oofem-2.5/src/oofemlib/load.h
++++ oofem-2.5/src/oofemlib/load.h
+@@ -178,0 +179 @@
 +    FloatArray* GiveCopyOfComponentArray() const;
-diff -rNw -U 0 oofem-2.4/src/oofemlib/modulemanager.h oofem-2.4/src/oofemlib/modulemanager.h
---- oofem-2.4/src/oofemlib/modulemanager.h
-+++ oofem-2.4/src/oofemlib/modulemanager.h
-@@ -148,0 +149,8 @@
-+    void setModule(int i, M* obj) {
-+        moduleList[i-1].reset(obj);
-+    }
-+
-+    void resizeModules(int _newSize) {
-+        moduleList.resize(_newSize);
-+    }
-+
-diff -rNw -U 0 oofem-2.4/src/sm/EngineeringModels/deidynamic.C oofem-2.4/src/sm/EngineeringModels/deidynamic.C
---- oofem-2.4/src/sm/EngineeringModels/deidynamic.C
-+++ oofem-2.4/src/sm/EngineeringModels/deidynamic.C
-@@ -137,0 +138,2 @@
+diff -rNw -U 0 oofem-2.5/src/sm/EngineeringModels/deidynamic.C oofem-2.5/src/sm/EngineeringModels/deidynamic.C
+--- oofem-2.5/src/sm/EngineeringModels/deidynamic.C
++++ oofem-2.5/src/sm/EngineeringModels/deidynamic.C
+@@ -137,0 +138 @@
 +    deltaT = tStep->giveTimeIncrement();
-+
-diff -rNw -U 0 oofem-2.4/src/sm/EngineeringModels/nldeidynamic.C oofem-2.4/src/sm/EngineeringModels/nldeidynamic.C
---- oofem-2.4/src/sm/EngineeringModels/nldeidynamic.C
-+++ oofem-2.4/src/sm/EngineeringModels/nldeidynamic.C
-@@ -196,0 +197 @@
+diff -rNw -U 0 oofem-2.5/src/sm/EngineeringModels/nldeidynamic.C oofem-2.5/src/sm/EngineeringModels/nldeidynamic.C
+--- oofem-2.5/src/sm/EngineeringModels/nldeidynamic.C
++++ oofem-2.5/src/sm/EngineeringModels/nldeidynamic.C
+@@ -196 +196 @@
+-
 +    deltaT = tStep->giveTimeIncrement();
+diff -rNw -U 0 oofem-2.5/src/sm/Materials/isolinearelasticmaterial.C oofem-2.5/src/sm/Materials/isolinearelasticmaterial.C
+--- oofem-2.5/src/sm/Materials/isolinearelasticmaterial.C
++++ oofem-2.5/src/sm/Materials/isolinearelasticmaterial.C
+@@ -156,4 +155,0 @@
+-
+-    if ( ( tStep->giveIntrinsicTime() < this->castingTime ) ) {
+-        answer.times(1. - this->preCastStiffnessReduction);
+-    }

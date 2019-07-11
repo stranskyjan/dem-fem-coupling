@@ -23,15 +23,11 @@ calculator1Display = Show(calculator1, renderView)
 Hide(warpByVector1, renderView)
 
 meanStressLUT = GetColorTransferFunction('MeanStress')
-meanStressLUT.RGBPoints = [0.0, 0.231373, 0.298039, 0.752941, 5e-17, 0.865003, 0.865003, 0.865003, 1e-16, 0.705882, 0.0156863, 0.14902]
-meanStressLUT.ScalarRangeInitialized = 1.0
 meanStressLUT.ApplyPreset('Warm to Cool', True)
-meanStressLUT.RescaleTransferFunction(-3e5, 3e5)
+meanStressLUT.RescaleTransferFunction(-6e5, 6e5)
 
 meanStressPWF = GetOpacityTransferFunction('MeanStress')
-meanStressPWF.Points = [0.0, 0.0, 0.5, 0.0, 1e-16, 1.0, 0.5, 0.0]
-meanStressPWF.ScalarRangeInitialized = 1
-meanStressPWF.RescaleTransferFunction(-3e5, 3e5)
+meanStressPWF.RescaleTransferFunction(-6e5, 6e5)
 
 
 #
