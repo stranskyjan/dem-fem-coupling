@@ -13,8 +13,9 @@ YADE 2019.01a.
 Postprocessing was done using [Paraview 5.4.1](https://www.paraview.org/).
 
 ## Installation
-There is [downloadAndInstall shell script](installation/downloadAndInstall.sh), which downloads, compiles and installs all necessary softwares.
+There is [Makefile](installation/Makefile), which downloads, compiles and installs all necessary softwares.
 It also modifies some part of source codes to make them all compatible.
+Run `make help` for more info.
 
 ## Examples
 See [examples](examples) directory.

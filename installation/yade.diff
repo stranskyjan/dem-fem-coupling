@@ -1,6 +1,6 @@
-diff -rNw -U 0 yade-2019.01a/py/pack/pack.py yade-2019.01a/py/pack/pack.py
---- yade-2019.01a/py/pack/pack.py
-+++ yade-2019.01a/py/pack/pack.py
+diff -rNw -U 0 py/pack/pack.py py/pack/pack.py
+--- py/pack/pack.py
++++ py/pack/pack.py
 @@ -554 +554 @@
 -def randomPeriPack(radius,initSize,rRelFuzz=0.0,memoizeDb=None,noPrint=False):
 +def randomPeriPack(radius,initSize,rRelFuzz=0.0,memoizeDb=None,noPrint=False,seed=0):
