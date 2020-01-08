@@ -44,9 +44,9 @@ ifdef poly
 endif
 	# use profiler or not
 ifdef no-profile
-	#python $(name).py
+	python $(name).py
 else
-	#python -m cProfile -o /tmp/$(name).pro $(name).py
+	python -m cProfile -o /tmp/$(name).pro $(name).py
 endif
 	# reset _yade.py script after running
 	sed -i 's/^usePolyhedra *=.*/usePolyhedra = False/' $(name)_yade.py
