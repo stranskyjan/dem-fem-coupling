@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 from paraview.simple import *
 paraview.simple._DisableFirstRenderCameraReset()
@@ -59,5 +60,5 @@ renderView.CameraParallelScale = 0
 RenderAllViews()
 out = '/tmp/surf1.png'
 WriteAnimation(out)
-print 'animation saved to {}'.format(out)
-print
+print('animation saved to {}'.format(out))
+print()

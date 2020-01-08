@@ -1,3 +1,4 @@
+from __future__ import print_function
 from pstats import Stats
 
 class Stat:
@@ -15,7 +16,7 @@ class StatsWrapper:
 		if len(ks) > 1:
 			ks = [k for k in ks if all(n in k for n in names)]
 		if len(ks) != 1:
-			for k in ks: print k
+			for k in ks: print(k)
 			raise RuntimeError
 		assert len(ks) == 1
 		k = ks[0]
@@ -37,7 +38,7 @@ class StatsPrinter:
 	def add(self,description,time):
 		self.items.append((description,time))
 	def pprint(self):
-		print
+		print()
 		for desc,time in self.items:
 			desc = "{}:".format(desc).ljust(self.ljust)
-			print '{} {:10.4f} s  ({:6.2f} %)'.format(desc,time,100.*time/self.totalTime)
+			print('{} {:10.4f} s  ({:6.2f} %)'.format(desc,time,100.*time/self.totalTime))
