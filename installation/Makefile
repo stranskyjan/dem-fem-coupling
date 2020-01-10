@@ -7,7 +7,7 @@
 ######################################################################
 # OPTIONS
 ######################################################################
-top-dir = _build
+top-dir = $(abspath _build)
 j       = 1
 j-oofem = $(j)
 j-yade  = $(j)
@@ -52,7 +52,7 @@ help:
 	@echo Tested on Ubuntu 18.04 LTS system
 	@echo
 	@echo Options:
-	@echo "   top-dir ... top directory for download, compilation ..."
+	@echo "   top-dir ... top directory for download, compilation ... Must be absolute path (!)"
 	@echo "   j       ... global -j option (number of cores) for compilation"
 	@echo "   j-oofem ... -j option (number of cores) for oofem compilation"
 	@echo "   j-yade  ... -j option (number of cores) for yade compilation"
