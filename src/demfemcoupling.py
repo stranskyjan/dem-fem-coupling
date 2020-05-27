@@ -727,10 +727,10 @@ class OofemYadeMeshContactMap(FemDemMeshContactMap):
 						self.forces[v.id] += f*w
 	def tetraWeights(self,cell,vs,cp):
 		v1,v2,v3,v4 = vs
-		w1 = (cp-v1).cross(cp-v3).dot(cp-v2)
-		w2 = (cp-v1).cross(cp-v2).dot(cp-v4)
-		w3 = (cp-v1).cross(cp-v4).dot(cp-v3)
-		w4 = (cp-v2).cross(cp-v3).dot(cp-v4)
+		w1 = (cp-v2).cross(cp-v3).dot(cp-v4)
+		w2 = (cp-v1).cross(cp-v4).dot(cp-v3)
+		w3 = (cp-v1).cross(cp-v2).dot(cp-v4)
+		w4 = (cp-v1).cross(cp-v3).dot(cp-v2)
 		sws = sum((w1,w2,w3,w4))
 		ws = [w/sws for w in (w1,w2,w3,w4)]
 		return ws
