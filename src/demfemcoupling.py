@@ -539,7 +539,6 @@ class OofemYadeMeshMultiscaleMap(FemDemMeshMultiscaleMap):
 	def __init__(self,*args):
 		FemDemMeshMultiscaleMap.__init__(self,*args)
 		liboofem = self.fem._lib
-		self._IST_PlasticStrainTensor = liboofem.InternalStateType.IST_PlasticStrainTensor
 		self._IST_StrainTensor = liboofem.InternalStateType.IST_StrainTensor
 		self._IST_StressTensor = liboofem.InternalStateType.IST_StressTensor
 	def getStressFromDem(self):
@@ -554,26 +553,7 @@ class OofemYadeMeshMultiscaleMap(FemDemMeshMultiscaleMap):
 		for ip,stress in zip(self.ips,self.stresses):
 			ip = self.fem.giveIntegrationPoint(ip)
 			val = self._stressMatrix2FloatArray(stress)
-			k,kInv = liboofem.FloatMatrix(),liboofem.FloatMatrix(6,6)
-			strain,temp,temp2,plasticStrain = liboofem.FloatArray(),liboofem.FloatArray(),liboofem.FloatArray(),liboofem.FloatArray()
-			liboofem.material2structuralMaterial(ip.giveMaterial()).giveStiffnessMatrix(k,liboofem.MatResponseMode.SecantStiffness,ip,None)
-			kNP = Matrix6.Zero
-			for i in xrange(6):
-				for j in xrange(6):
-					kNP[i,j] = k[i,j]
-			kInvNP = kNP.inverse()
-			for i in xrange(6):
-				for j in xrange(6):
-					kInv[i,j] = kInvNP[i,j]
-			strain = liboofem.FloatArray()
-			ip.giveMaterial().giveIPValue(strain,ip,self._IST_StrainTensor,None)
-			temp.beProductOf(kInv,strain)
-			temp2.beDifferenceOf(val,temp)
-			plasticStrain.beProductOf(kInv,temp2)
-			plasticStrain.times(-1.)
-			mat = liboofem.material2structMatSettable(ip.giveMaterial())
 			mat.setIPValue(val,ip,self._IST_StressTensor)
-			mat.setIPValue(plasticStrain,ip,self._IST_PlasticStrainTensor)
 	def getStrainFromFem(self):
 		liboofem = self.fem._lib
 		for i,ip in enumerate(self.ips):
