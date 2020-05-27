@@ -36,10 +36,13 @@ In case of any question or problem, please leave an issue at the [githup page of
 - [J. Stranský. Open source DEM–FEM coupling, Particles 2013](http://congress.cimne.com/particles2013/proceedings/full/p182.pdf)
 - [J. Stranský. Combination of FEM and DEM with application to railway ballast-sleeper interaction, Engineering Mechanics 2014](http://www.engmech.cz/2014/im/doc/EM2014_proceedings.pdf)
 - [J. Stranský. Mesoscale Discrete Element Model for Concrete and Its Combination with FEM, Ph.D. thesis](https://github.com/stranskyjan/phd-thesis)
+- [W. Song, B. Huang, X. Shu, J. Stránský. Interaction between Railroad Ballast and Sleeper: A DEM-FEM Approach. Int. J. Geomech. 19, 2019](https://ascelibrary.org/doi/abs/10.1061/%28ASCE%29GM.1943-5622.0001388)
 
 ## Acknowledgement
-- To [Weimin Song](https://www.researchgate.net/profile/Weimin_Song)
-for testing some of the codes.
+- To
+[Weimin Song](https://www.researchgate.net/profile/Weimin_Song),
+[De Zhang](https://www.researchgate.net/profile/De_Zhang13)
+and others for testing and feedback.
 
 ## TODO
 - comments of the source code
