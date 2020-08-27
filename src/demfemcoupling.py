@@ -553,6 +553,7 @@ class OofemYadeMeshMultiscaleMap(FemDemMeshMultiscaleMap):
 		for ip,stress in zip(self.ips,self.stresses):
 			ip = self.fem.giveIntegrationPoint(ip)
 			val = self._stressMatrix2FloatArray(stress)
+			mat = liboofem.material2structMatSettable(ip.giveMaterial())
 			mat.setIPValue(val,ip,self._IST_StressTensor)
 	def getStrainFromFem(self):
 		liboofem = self.fem._lib
